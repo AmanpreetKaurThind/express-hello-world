@@ -65,7 +65,7 @@ async function decodeTokenData(token) {
     return JSON.parse(data);
 }
 
-app.get('/api/codex/bypass', async (req, res) => {
+app.get('/api/codexxx/bypass', async (req, res) => {
     const sessionToken = req.query.token;
     const stage = parseInt(req.query.stage);
 
@@ -154,7 +154,7 @@ app.get('/api/codex/bypass', async (req, res) => {
 });
 
 
-app.get('/api/codexxxx/bypass', async (req, res) => {
+app.get('/api/codex/bypass', async (req, res) => {
     const link = req.query.link;
     if (!link) {
         return res.status(400).send('ethos detected codex link is missing');
@@ -1150,112 +1150,112 @@ app.get('/api/adlinks/bypass', async (req, res) => {
         // Match the URL against the patterns
         if (linkvertisePattern.test(url)) {
             // Send request to the corresponding API route for Linkvertise
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/linkvertise/dynamic?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/linkvertise/dynamic?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (linkvertise2Pattern.test(url)) {
             // Send request to the corresponding API route for Linkvertise 2
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/linkvertise/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/linkvertise/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (mboostPattern.test(url)) {
             // Send request to the corresponding API route for mboost
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/mboost/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/mboost/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (sub2unlockPattern.test(url)) {
             // Send request to the corresponding API route for sub2unlock
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/sub2unlock/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/sub2unlock/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (rekonisePattern.test(url)) {
             // Send request to the corresponding API route for rekonise
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/rekonise/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/rekonise/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (letsboostPattern.test(url)) {
             // Send request to the corresponding API route for letsboost
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/letsboost/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/letsboost/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (sub2getPattern.test(url)) {
             // Send request to the corresponding API route for sub2get
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/sub2get/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/sub2get/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (socialwolvezPattern.test(url)) {
             // Send request to the corresponding API route for socialwolvez
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/socialwolvez/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/socialwolvez/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (boostinkPattern.test(url)) {
             // Send request to the corresponding API route for boostink
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/boostink/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/boostink/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (lootlinksPattern.test(url)) {
             // Send request to the corresponding API route for lootlinks
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/test/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/test/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (platoboostdeltaPattern.test(url)) {
             // Send request to the corresponding API route for platoboost
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/roblox/delta/keysystem/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/roblox/delta/keysystem/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (workinkPattern.test(url)) {
             // Send request to the corresponding API route for workink
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/linkvertise/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/linkvertise/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else if (valysePattern.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/valyse/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/valyse/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (vgdPattern.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/vgd/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/vgd/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (rebrandlyRegex.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/rebrandlyy/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/rebrandlyy/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (tinyUrlRegex.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/tinyurl/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/tinyurl/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (isGdRegex.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/isgd/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/isgd/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (sub1sregex.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/sub1s/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/sub1s/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (sub2unlocknet.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/sub2unlocknet/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/sub2unlocknet/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (sub4unlockcom.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/sub4unlockcom/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/sub4unlockcom/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (tinylinkonl.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/tinylinkonl/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/tinylinkonl/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
           } else if (codex.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-testing.vercel.app/api/codexxxx/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/codexxxx/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else {
@@ -2044,7 +2044,7 @@ app.get("/roblox/hydrogen/android", async (req, res) => {
 
     if (downloadlink) {
       // Making request to bypass URL
-      const bypassedResponse = await axios.get(`https://ethos-testing.vercel.app/api/adlinks/bypass?url=${encodeURIComponent(downloadlink)}`);
+      const bypassedResponse = await axios.get(`https://ethos-api.onrender.com/api/adlinks/bypass?url=${encodeURIComponent(downloadlink)}`);
       const bypassedData = bypassedResponse.data;
 
       if (bypassedData && bypassedData.bypassed) {
@@ -2100,7 +2100,7 @@ app.get("/roblox/vegax/android", async (req, res) => {
       downloadLink = downloadLink.replace('https://direct-link.net', 'https://linkvertise.com');
 
       // Bypass the linkvertise URL
-      const bypassedResponse = await axios.get(`https://ethos-testing.vercel.app/api/adlinks/bypass?url=${encodeURIComponent(downloadLink)}`);
+      const bypassedResponse = await axios.get(`https://ethos-api.onrender.com/api/adlinks/bypass?url=${encodeURIComponent(downloadLink)}`);
 
       // Extract the plain text data from the bypassed response
       const bypassedData = bypassedResponse.data.bypassed;
