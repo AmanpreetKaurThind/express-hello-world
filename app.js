@@ -1255,7 +1255,7 @@ app.get('/api/adlinks/bypass', async (req, res) => {
             res.json(response.data);
           } else if (codex.test(url)) {
             // Send request to the corresponding API route for valyse
-            const response = await axios.get(`https://ethos-api.onrender.com/api/codexxxx/bypass?link=${encodeURIComponent(url)}`);
+            const response = await axios.get(`https://ethos-api.onrender.com/api/codex/bypass?link=${encodeURIComponent(url)}`);
             // Return the response received from the API route
             res.json(response.data);
         } else {
