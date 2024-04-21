@@ -875,7 +875,9 @@ const supportedadstuff = [
     "is.gd",
     "sub2unlock.net",
     "sub4unlock.com",
-    "tinylink.onl"
+    "tinylink.onl",
+    "Valyse Authentication System",
+    "Codex Authentication System"
 ];
 
 app.get('/api/adlinks/supported', (req, res) => {
