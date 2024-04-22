@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 app.get('/api/codex/bypass', async (req, res) => {
     const link = req.query.link;
     if (!link) {
-        return res.status(400).send('no codex link, whats this bypass for then? - ethos api');
+        return res.status(400).send('No codex link provided.');
     }
 
     // Extracting session token from the link query parameter
@@ -151,7 +151,7 @@ app.get('/api/codex/bypass', async (req, res) => {
             console.log('Bypass success :3');
             // Simulating sleep for 3 seconds
             await new Promise(resolve => setTimeout(resolve, 3000));
-          res.json({ bypassed: 'Ethos bypassed Codex successfully and has authenticated you.' });
+            res.json({ bypassed: 'Ethos has bypassed Codex successfully, if you got this response in less than 15-30 seconds, your bypass may have not been successful and has possibly failed. If this happens, contact shehajeez on Discord.' });
             return;
         }
         res.send('Authentication failed');
@@ -160,6 +160,7 @@ app.get('/api/codex/bypass', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 app.get('/api/hikari/bot/bypass', async (req, res) => {
     const urlToBypass = req.query.link;
