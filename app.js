@@ -25,7 +25,141 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/api/codex/bypass', async (req, res) => {
+    const link = req.query.link;
+    if (!link) {
+        return res.status(400).send('no codex link, whats this bypass for then? - ethos api');
+    }
 
+    // Extracting session token from the link query parameter
+    const sessionToken = new URL(link).searchParams.get("token");
+    if (!sessionToken) {
+        return res.status(400).send('Token parameter is missing in the link');
+    }
+
+    async function getStages(session) {
+        let response = await fetch('https://api.codex.lol/v1/stage/stages', {
+            method: 'GET',
+            headers: {
+                'Android-Session': session
+            }
+        });
+        let data = await response.json();
+
+        if (data.success) {
+            if (data.authenticated) {
+                return [];
+            }
+            return data.stages;
+        } else {
+            throw new Error("Failed to get stages");
+        }
+    }
+
+    async function initiateStage(session, stageId) {
+        let response = await fetch('https://api.codex.lol/v1/stage/initiate', {
+            method: 'POST',
+            headers: {
+                'Android-Session': session,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ stageId })
+        });
+        let data = await response.json();
+
+        if (data.success) {
+            return data.token;
+        } else {
+            throw new Error("Failed to initiate stage");
+        }
+    }
+
+    async function validateStage(session, token, referrer) {
+        let response = await fetch('https://api.codex.lol/v1/stage/validate', {
+            method: 'POST',
+            headers: {
+                'Android-Session': session,
+                'Content-Type': 'application/json',
+                'Task-Referrer': referrer
+            },
+            body: JSON.stringify({ token })
+        });
+        let data = await response.json();
+
+        if (data.success) {
+            return data.token;
+        } else {
+            throw new Error("Failed to validate stage");
+        }
+    }
+
+    async function authenticate(session, validatedTokens) {
+        let response = await fetch('https://api.codex.lol/v1/stage/authenticate', {
+            method: 'POST',
+            headers: {
+                'Android-Session': session,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ tokens: validatedTokens })
+        });
+        let data = await response.json();
+
+        if (data.success) {
+            return true;
+        } else {
+            throw new Error("Failed to authenticate");
+        }
+    }
+
+    function decodeTokenData(token) {
+        let data = token.split(".")[1];
+        data = Buffer.from(data, 'base64').toString();
+        return JSON.parse(data);
+    }
+
+    try {
+        let stages = await getStages(sessionToken);
+        let validatedTokens = [];
+
+        for (let stage of stages) {
+            let stageId = stage.uuid;
+            let initToken = await initiateStage(sessionToken, stageId);
+
+            // Simulating sleep for 6 seconds
+            await new Promise(resolve => setTimeout(resolve, 6000));
+
+            let tokenData = decodeTokenData(initToken);
+            let referrer;
+
+            if (tokenData.link.includes('loot-links')) {
+                referrer = 'https://loot-links.com/';
+            } else if (tokenData.link.includes('loot-link')) {
+                referrer = 'https://loot-link.com/';
+            } else {
+                referrer = 'https://linkvertise.com/';
+            }
+
+            let validatedToken = await validateStage(sessionToken, initToken, referrer);
+            validatedTokens.push({ uuid: stageId, token: validatedToken });
+            console.log(`${stageId} validated`);
+
+            // Simulating sleep for 1.5 seconds
+            await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        if (await authenticate(sessionToken, validatedTokens)) {
+            console.log('Bypass success :3');
+            // Simulating sleep for 3 seconds
+            await new Promise(resolve => setTimeout(resolve, 3000));
+          res.json({ bypassed: 'Ethos bypassed Codex successfully and has authenticated you.' });
+            return;
+        }
+        res.send('Authentication failed');
+    } catch (e) {
+        console.error(e);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 app.get('/api/hikari/bot/bypass', async (req, res) => {
     const urlToBypass = req.query.link;
@@ -64,95 +198,6 @@ async function decodeTokenData(token) {
     data = Buffer.from(data, 'base64').toString();
     return JSON.parse(data);
 }
-
-app.get('/api/codexxx/bypass', async (req, res) => {
-    const sessionToken = req.query.token;
-    const stage = parseInt(req.query.stage);
-
-    if (!sessionToken || isNaN(stage) || stage < 1 || stage > 3) {
-        return res.status(400).json({ bypassed: 'stage parameter required, ethos cant complete all at once cuz of vercel timing out lol' });
-    }
-
-    try {
-        let response = await fetch('https://api.codex.lol/v1/stage/stages', {
-            method: 'GET',
-            headers: {
-                'Android-Session': sessionToken
-            }
-        });
-        let data = await response.json();
-
-        if (!data.success) {
-            throw new Error("Failed to get stages");
-        }
-
-        const stages = data.authenticated ? [] : data.stages;
-        const validatedTokens = [];
-
-        let stageData = stages[stage - 1];
-        if (!stageData) {
-            return res.status(404).json({ error: 'Stage not found' });
-        }
-
-        let stageId = stageData.uuid;
-
-        response = await fetch('https://api.codex.lol/v1/stage/initiate', {
-            method: 'POST',
-            headers: {
-                'Android-Session': sessionToken,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ stageId })
-        });
-        data = await response.json();
-
-        if (!data.success) {
-            throw new Error("Failed to initiate stage");
-        }
-
-        let initToken = data.token;
-
-        await new Promise(resolve => setTimeout(resolve, 6000)); // Simulating sleep for 6 seconds
-
-        let tokenData = await decodeTokenData(initToken);
-        let referrer;
-
-        if (tokenData.link.includes('loot-links')) {
-            referrer = 'https://loot-links.com/';
-        } else if (tokenData.link.includes('loot-link')) {
-            referrer = 'https://loot-link.com/';
-        } else {
-            referrer = 'https://linkvertise.com/';
-        }
-
-        response = await fetch('https://api.codex.lol/v1/stage/validate', {
-            method: 'POST',
-            headers: {
-                'Android-Session': sessionToken,
-                'Content-Type': 'application/json',
-                'Task-Referrer': referrer
-            },
-            body: JSON.stringify({ token: initToken })
-        });
-        data = await response.json();
-
-        if (!data.success) {
-            throw new Error("Failed to validate stage");
-        }
-
-        let validatedToken = data.token;
-        validatedTokens.push({ uuid: stageId, token: validatedToken });
-        console.log(`${stageId} validated`);
-
-        let stageMessage = `Ethos completed Stage ${stage} successfully`;
-
-        res.status(200).json({ bypassed: stageMessage });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
 
 app.get('/api/codex/bypass', async (req, res) => {
     const link = req.query.link;
