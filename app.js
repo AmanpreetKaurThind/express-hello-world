@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 app.get('/api/codex/bypass', async (req, res) => {
     const link = req.query.link;
     if (!link) {
-        return res.status(400).send('No codex link provided.');
+        return res.status(400).send('No codex link provided????.');
     }
 
     const sessionToken = new URL(link).searchParams.get("token");
